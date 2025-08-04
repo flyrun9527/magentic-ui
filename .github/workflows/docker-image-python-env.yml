@@ -1,0 +1,37 @@
+name: Build and Push Docker Image magentic-ui-browser
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Specify the branch to build (e.g.,dev-main)'
+        required: true
+        default: 'dev-main'
+      image_tag:
+        type: string
+        description: 'Custom Docker image tag (e.g. latest)'
+        default: 'latest'
+        required: false
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout specified branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Log in to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.cn-beijing.aliyuncs.com
+      
+      - name: Build Docker image
+        run: |
+          TAG="${{ github.event.inputs.image_tag }}"        
+          docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f docker/magentic-ui-python-env/Dockerfile -t registry.cn-beijing.aliyuncs.com/flyrun/magentic-ui-python:$TAG .
+
+      - name: Push Docker image
+        run: |
+          TAG="${{ github.event.inputs.image_tag }}"           
+          docker push registry.cn-beijing.aliyuncs.com/flyrun/magentic-ui-python:$TAG
