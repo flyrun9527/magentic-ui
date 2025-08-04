@@ -1,4 +1,4 @@
-name: Build and Push Docker Image Zh
+name: Build and Push Docker Image magentic-ui-browser
 
 on:
   workflow_dispatch:
