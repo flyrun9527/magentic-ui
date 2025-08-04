@@ -28,8 +28,9 @@ jobs:
       
       - name: Build Docker image
         run: |
-          TAG="${{ github.event.inputs.image_tag }}"        
-          docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f docker/magentic-ui-python-env/Dockerfile -t registry.cn-beijing.aliyuncs.com/flyrun/magentic-ui-python:$TAG .
+          TAG="${{ github.event.inputs.image_tag }}"   
+          cd docker/magentic-ui-python-env
+          docker build --platform linux/amd64 --build-arg LIGHTEN=1 -f Dockerfile -t registry.cn-beijing.aliyuncs.com/flyrun/magentic-ui-python:$TAG .
 
       - name: Push Docker image
         run: |
