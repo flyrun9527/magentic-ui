@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/backend/Dockerfile
+    container_name: magentic-ui-backend
+    ports:
+      - "8081:8081"       
+    environment:
+      - _HOST=0.0.0.0
+      - _PORT=8081
+      - MAGENTIC_UI_API_DOCS=true
+      - _APPDIR=/data/appdir
+      - INTERNAL_WORKSPACE_ROOT=/data/appdir
+      - EXTERNAL_WORKSPACE_ROOT=/data/appdir
+      - INSIDE_DOCKER=1
+      - RUN_WITHOUT_DOCKER=False
+      # - DATABASE_URI=sqlite:////data/appdir/magentic_ui.db
+    volumes:
+      - ./magui_data:/data/appdir
+      - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+      - "8081"
+    restart: unless-stopped
+    networks:
+      - my-network
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/frontend/Dockerfile
+    container_name: magentic-ui-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - my-network
+
+volumes:
+  magui_data:
+
+networks:
+  my-network:
+    driver: bridge
+    name: my-network

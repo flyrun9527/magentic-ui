@@ -213,13 +213,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <SubMenu
             items={[
               {
-                id: "mcp_servers",
-                label: "MCP Servers",
-                icon: <Server className="w-4 h-4" />,
+                id: "current_session",
+                label: "当前会话",
+                icon: <FileText className="w-4 h-4" />,
               },
               {
                 id: "saved_plan",
-                label: "Saved Plans",
+                label: "已保存的计划",
                 icon: <Archive className="w-4 h-4" />,
               },
             ]}
@@ -232,7 +232,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <>
             <div className="flex items-center justify-between py-2 border-secondary">
               <div className="flex items-center gap-2">
-                <span className="text-primary font-medium">Sessions</span>
+                <span className="text-primary font-medium">会话</span>
 
                 {isLoading ? (
                   <div className="py-2 flex text-sm text-secondary">
@@ -258,7 +258,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onClick={() => onEditSession()}
                     disabled={isLoading}
                   >
-                    New Session
+                    新会话
                   </Button>
                 </Tooltip>
               </div>
@@ -274,14 +274,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <>
                   {groupedSessions.today.length > 0 && (
                     <div>
-                      <div className="py-2 text-sm text-secondary">Today</div>
+                      <div className="py-2 text-sm text-secondary">今天</div>
                       {renderSessionGroup(groupedSessions.today)}
                     </div>
                   )}
                   {groupedSessions.yesterday.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Yesterday
+                        昨天
                       </div>
                       {renderSessionGroup(groupedSessions.yesterday)}
                     </div>
@@ -289,7 +289,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {groupedSessions.last7Days.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Last 7 Days
+                        7天前
                       </div>
                       {renderSessionGroup(groupedSessions.last7Days)}
                     </div>
@@ -297,7 +297,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {groupedSessions.last30Days.length > 0 && (
                     <div>
                       <div className="py-2 text-sm text-secondary">
-                        Last 30 Days
+                        30天前
                       </div>
                       {renderSessionGroup(groupedSessions.last30Days)}
                     </div>

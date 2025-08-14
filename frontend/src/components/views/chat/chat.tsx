@@ -1150,9 +1150,9 @@ export default function ChatView({
                   : "w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl"
               } mx-auto px-4 sm:px-6 md:px-8`}
             >
-              <div className="text-secondary text-lg mb-6">
+              {/* <div className="text-secondary text-lg mb-6">
                 Enter a message to get started
-              </div>
+              </div> */}
 
               <div className="w-full">
                 <ChatInput

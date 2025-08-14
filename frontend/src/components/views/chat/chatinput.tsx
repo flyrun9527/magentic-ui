@@ -698,13 +698,13 @@ const ChatInput = React.forwardRef<{ focus: () => void }, ChatInputProps>(
                       minHeight: "50px",
                     }}
                     placeholder={
-                      runStatus === "awaiting_input"
-                        ? "Type your response here and let Magentic-UI know of any changes in the browser."
-                        : enable_upload
-                        ? dragOver
-                          ? "Drop files here..."
-                          : "Type your message here..."
-                        : "Type your message here..."
+                    runStatus === "awaiting_input"
+                    ? "在此处输入您的回复并让AI知道浏览器中的任何更改."
+                    : enable_upload
+                    ? dragOver
+                    ? "将文件拖放到此处..."
+                    : "在此处输入您的消息..."
+                    : "在此处输入您的消息..."
                     }
                     disabled={isInputDisabled}
                   />

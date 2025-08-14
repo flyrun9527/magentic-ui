@@ -258,7 +258,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
               }`}
               onClick={() => handleTabChange("screenshots")}
             >
-              Screenshots
+              屏幕截图
             </button>
             <button
               className={`px-6 py-2 font-medium rounded-t-lg transition-colors ${
@@ -268,7 +268,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
               }`}
               onClick={() => handleTabChange("live")}
             >
-              Live View
+              实时画面
             </button>
           </div>
 

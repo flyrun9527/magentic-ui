@@ -56,6 +56,8 @@ Helpful tips to ensure success:
     - If you need to scroll a container inside the page and not the entire page, hover on it and then scroll up or down.
     - If neeeded as a last resort you can use keypresses to scroll the page up or down, use the escape key to dismiss popups, and other keys to interact with the page.
 
+IMPORTANT LANGUAGE REQUIREMENT: All natural-language responses and explanations should be in Simplified Chinese. Keep code, JSON keys, and tool argument names in their required language.
+
 When outputing multiple actions at the same time, make sure:
 1) Only output multiple actions if you are sure that they are all valid and necessary.
 2) if there is a current select option or a dropdown, output only a single action to select it and nothing else
@@ -146,6 +148,8 @@ Helpful tips to ensure success:
     - Do not repeat the same actions consecutively if they are not working.
     - When filling a form, make sure to scroll down to ensure you fill the entire form.
     - Sometimes, searching bing for the method to do something in the general can be more helpful than searching for specific details.
+
+IMPORTANT LANGUAGE REQUIREMENT: All natural-language content (including the explanation field) must be in Simplified Chinese. The JSON keys and schema MUST remain exactly as specified in English.
 
 Output an answer in pure JSON format according to the following schema. The JSON object must be parsable as-is. DO NOT OUTPUT ANYTHING OTHER THAN JSON, AND DO NOT DEVIATE FROM THIS SCHEMA:
 

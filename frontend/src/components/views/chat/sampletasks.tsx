@@ -38,7 +38,7 @@ const SampleTasks: React.FC<SampleTasksProps> = ({ onSelect }) => {
 
   return (
     <div className="mb-6">
-      <div className="mt-4 mb-2 text-sm opacity-70 text-secondary">
+      {/* <div className="mt-4 mb-2 text-sm opacity-70 text-secondary">
         or try a sample task from below{" "}
       </div>
       <div className="flex flex-col gap-2 w-full">
@@ -63,7 +63,7 @@ const SampleTasks: React.FC<SampleTasksProps> = ({ onSelect }) => {
             {isExpanded ? "Show less..." : "Show more sample tasks..."}
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

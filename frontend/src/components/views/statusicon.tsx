@@ -24,7 +24,7 @@ export const getStatusIcon = (
             size={20}
             className="inline-block mr-1 text-accent animate-spin"
           />
-          <span className="inline-block mr-2 ml-1 ">Processing</span>
+          <span className="inline-block mr-2 ml-1 ">进行中</span>
         </div>
       );
     case "awaiting_input":

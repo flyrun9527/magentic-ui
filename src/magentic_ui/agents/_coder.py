@@ -352,6 +352,8 @@ class CoderAgent(BaseChatAgent, Component[CoderAgentConfig]):
     - For showing plots or other visualizations that are not just text, make sure to save them to file with the right extension for them to be displayed.
 
    VERY IMPORTANT: If you intend to write code to be executed, do not end your response without a code block. If you want to write code you must provide a code block in the current generation.
+
+    IMPORTANT LANGUAGE REQUIREMENT: All natural-language explanations and commentary should be in Simplified Chinese. Keep code, filenames, and API parameters in their required language.
     """
 
     def __init__(

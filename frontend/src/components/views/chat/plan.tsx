@@ -197,7 +197,7 @@ const PlanView: React.FC<PlanProps> = ({
             onClick={() => setIsCollapsed(false)}
           >
             <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
-            <h2 className="">Plan for: {task}</h2>
+            <h2 className="">计划: {task}</h2>
           </div>
         ) : (
           <>

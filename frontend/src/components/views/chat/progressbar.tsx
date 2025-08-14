@@ -222,7 +222,7 @@ export default function ProgressBar({
                 <div className="text-sm text-gray-500 mt-5 text-center">
                   {hasFinalAnswer ? (
                     <span className="text-green-600 font-medium">
-                      Task Completed
+                      任务完成
                     </span>
                   ) : adjustedProgress.plan?.task ? (
                     <span>

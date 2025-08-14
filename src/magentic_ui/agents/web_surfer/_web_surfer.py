@@ -1255,7 +1255,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
                 )
                 return [function_call], rects, tools, element_id_mapping, True
             except Exception as e:
-                error_msg = f"Failed to parse JSON response: {str(e)}. Response was: {response.content}"
+                error_msg = f"解析模型返回的 JSON 失败：{str(e)}。原始响应：{response.content}"
                 return error_msg, rects, tools, element_id_mapping, False
 
     async def _check_url_and_generate_msg(self, url: str) -> Tuple[str, bool]:
@@ -1266,13 +1266,13 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
                 last_rejected_url = self._last_rejected_url
                 self._last_rejected_url = None
                 return (
-                    f"I am not allowed to access the website {last_rejected_url} because it is not in the list of websites I can access and the user has declined to approve it.",
+                    f"无法访问站点 {last_rejected_url}：该站点不在允许列表，且用户拒绝授权。",
                     False,
                 )
 
         if self._url_status_manager.is_url_blocked(url):
             return (
-                f"I am not allowed to access the website {url} because has been blocked.",
+                f"无法访问站点 {url}：该站点已被阻止。",
                 False,
             )
 
@@ -1287,7 +1287,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
                     # The content string here is important because the UI is checking for specific wording to detect the URL approval request
                     request_message = TextMessage(
                         source=self.name,
-                        content=f"The website {url} is not allowed. Would you like to allow the domain {domain} for this session?",
+                        content=f"站点 {url} 当前不在允许列表。是否在本次会话中允许域名 {domain}？",
                     )
                     response = await self.action_guard.get_approval(request_message)
                 if response:
@@ -1301,7 +1301,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
 
             self._last_rejected_url = url
             return (
-                f"I am not allowed to access the website {url} because it is not in the list of websites I can access and the user has declined to allow it.",
+                f"无法访问站点 {url}：该站点不在允许列表，且用户拒绝授权。",
                 False,
             )
         return "", True
@@ -1316,7 +1316,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         if not approved:
             return ret
 
-        action_description = f"I typed '{url}' into the browser address bar."
+        action_description = f"我在浏览器地址栏输入了『{url}』。"
         assert self._page is not None
         if url.startswith(("https://", "http://", "file://", "about:")):
             (
@@ -1355,13 +1355,13 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         assert self._page is not None
         response = await self._playwright_controller.go_back(self._page)
         if response:
-            return "I clicked the browser back button."
-        return "No previous page in the browser history or couldn't navigate back."
+            return "我点击了浏览器的后退按钮。"
+        return "浏览器历史中没有上一页或无法后退。"
 
     async def _execute_tool_refresh_page(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
         await self._playwright_controller.refresh_page(self._page)
-        return "I refreshed the current page."
+        return "我刷新了当前页面。"
 
     async def _execute_tool_web_search(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
@@ -1369,7 +1369,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         if not approved:
             return ret
         query = cast(str, args.get("query"))
-        action_description = f"I typed '{query}' into the browser search bar."
+        action_description = f"我在浏览器搜索栏输入了『{query}』。"
         (
             reset_prior_metadata,
             reset_last_download,
@@ -1386,24 +1386,24 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
     async def _execute_tool_page_up(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
         await self._playwright_controller.page_up(self._page)
-        return "I scrolled up one page in the browser."
+        return "我在浏览器中向上滚动了一页。"
 
     async def _execute_tool_page_down(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
         await self._playwright_controller.page_down(self._page)
-        return "I scrolled down one page in the browser."
+        return "我在浏览器中向下滚动了一页。"
 
     async def _execute_tool_scroll_down(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
         pixels = int(args.get("pixels", 400))
         await self._playwright_controller.scroll_mousewheel(self._page, "down", pixels)
-        return f"I scrolled down {pixels} pixels in the browser."
+        return f"我在浏览器中向下滚动了 {pixels} 像素。"
 
     async def _execute_tool_scroll_up(self, args: Dict[str, Any]) -> str:
         assert self._page is not None
         pixels = int(args.get("pixels", 400))
         await self._playwright_controller.scroll_mousewheel(self._page, "up", pixels)
-        return f"I scrolled up {pixels} pixels in the browser."
+        return f"我在浏览器中向上滚动了 {pixels} 像素。"
 
     async def _execute_tool_click(
         self,
@@ -1417,7 +1417,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         target_id = element_id_mapping[target_id]
 
         action_description = (
-            f"I clicked '{target_name}'." if target_name else "I clicked the control."
+            f"我点击了『{target_name}』。" if target_name else "我点击了该控件。"
         )
         assert self._context is not None
         assert self._page is not None
@@ -1451,9 +1451,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         button = str(args.get("button", "left"))
         button = cast(Literal["left", "right"], button)
         action_description = (
-            f"I clicked '{target_name}' with button '{button}' and hold {hold} seconds."
+            f"我使用『{button}』键点击了『{target_name}』并按住 {hold} 秒。"
             if target_name
-            else f"I clicked the control with button '{button}' and hold {hold} seconds."
+            else f"我使用『{button}』键点击了该控件并按住 {hold} 秒。"
         )
         assert self._context is not None
         assert self._page is not None
@@ -1490,9 +1490,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         delete_existing_text = bool(args.get("delete_existing_text"))
 
         action_description = (
-            f"I typed '{text_value}' into '{input_field_name}'."
+            f"我在『{input_field_name}』中输入了『{text_value}』。"
             if input_field_name
-            else f"I typed '{text_value}'."
+            else f"我输入了『{text_value}』。"
         )
         assert self._page is not None
         await self._playwright_controller.fill_id(
@@ -1533,9 +1533,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         target_id = element_id_mapping.get(target_id, target_id)
 
         action_description = (
-            f"I hovered over '{target_name}'."
+            f"我将鼠标悬停在『{target_name}』上。"
             if target_name
-            else "I hovered over the control."
+            else "我将鼠标悬停在该控件上。"
         )
         assert self._page is not None
         await self._playwright_controller.hover_id(self._page, target_id)
@@ -1545,7 +1545,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         assert self._page is not None
         duration = cast(int, args.get("duration", 3))
         await self._playwright_controller.sleep(self._page, duration)
-        return f"I waited {duration} seconds."
+        return f"我等待了 {duration} 秒。"
 
     async def _execute_tool_select_option(
         self,
@@ -1558,9 +1558,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         target_id = element_id_mapping.get(target_id, target_id)
 
         action_description = (
-            f"I selected the option '{target_name}'."
+            f"我选择了选项『{target_name}』。"
             if target_name
-            else "I selected the option."
+            else "我选择了该选项。"
         )
         assert self._context is not None
         assert self._page is not None
@@ -1585,7 +1585,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         if not approved:
             return ret
         assert self._context is not None
-        action_description = f"I created a new tab and navigated to '{url}'."
+        action_description = f"我新建了一个标签页并访问了『{url}』。"
         new_page = await self._playwright_controller.create_new_tab(self._context, url)
         self._page = new_page
         # Ensure the new page is visible and active
@@ -1605,9 +1605,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
             # Ensure the switched tab is visible and active
             await self._page.bring_to_front()
             self._prior_metadata_hash = None
-            return f"I switched to tab {tab_index}."
+            return f"我切换到了第 {tab_index} 个标签页。"
         except (ValueError, TypeError) as e:
-            return f"Invalid tab index: {e}"
+            return f"无效的标签页索引：{e}"
 
     async def _execute_tool_close_tab(self, args: Dict[str, Any]) -> str:
         try:
@@ -1621,9 +1621,9 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
             # Ensure the new active tab is visible and active
             await self._page.bring_to_front()
             self._prior_metadata_hash = None
-            return f"I closed tab {tab_index} and switched to an adjacent tab."
+            return f"我关闭了第 {tab_index} 个标签页并切换到了相邻的标签页。"
         except (ValueError, TypeError) as e:
-            return f"Invalid tab index: {e}"
+            return f"无效的标签页索引：{e}"
 
     async def _execute_tool_upload_file(
         self,
@@ -1662,7 +1662,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         keys = args["keys"]
         await self._playwright_controller.keypress(self._page, keys)
         keys_str = ", ".join(f"'{k}'" for k in keys)
-        return f"Pressed the following keys in sequence: {keys_str}"
+        return f"按顺序按下了以下按键：{keys_str}"
 
     async def _execute_tool(
         self,
@@ -1758,7 +1758,7 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
             # Clean up any cursor animations or highlights that were added by animate_actions.
             assert self._page is not None
             await self._playwright_controller.cleanup_animations(self._page)
-            return f"WebSurfer was paused, action '{name}' was cancelled."
+            return f"WebSurfer 已暂停，操作『{name}』已被取消。"
         finally:
             # Cancel the wait_for_pause_task if it is still running
             if not wait_for_pause_task.done():

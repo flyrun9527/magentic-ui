@@ -8,6 +8,8 @@ ORCHESTRATOR_SYSTEM_MESSAGE_EXECUTION = """
     You have access to a team of agents who can help you answer questions and complete tasks.
 
     The date today is: {date_today}
+
+    IMPORTANT LANGUAGE REQUIREMENT: All natural-language responses should be in Simplified Chinese. Keep code, JSON keys, and API parameters in their required language.
 """
 
 ORCHESTRATOR_FINAL_ANSWER_PROMPT = """
@@ -25,6 +27,8 @@ ORCHESTRATOR_FINAL_ANSWER_PROMPT = """
     Make sure to also say whether the answer was found using online search or from your own knowledge.
 
     There is no need to be verbose, but make sure it contains enough information for the user.
+
+    IMPORTANT: Provide the final answer in Simplified Chinese. Keep code snippets or identifiers in their original language.
 """
 
 # The specific format of the instruction for the agents to follow
@@ -89,7 +93,10 @@ def get_orchestrator_system_message_planning(
     {team}
 
 
-    Your plan should should be a sequence of steps that will complete the task."""
+    Your plan should should be a sequence of steps that will complete the task.
+
+    IMPORTANT LANGUAGE REQUIREMENT: All natural-language content you produce (including clarifications, responses, and step descriptions) must be written in Simplified Chinese. Keep code, JSON keys, and API parameters in their required language.
+    """
 
     if sentinel_tasks_enabled:
         # Add SentinelPlanStep functionality
@@ -702,7 +709,10 @@ def get_orchestrator_plan_prompt_json(sentinel_tasks_enabled: bool = False) -> s
         {additional_instructions}
         When you answer without a plan and your answer includes factual information, make sure to say whether the answer was found using online search or from your own internal knowledge.
 
-        Your plan should should be a sequence of steps that will complete the task."""
+        Your plan should should be a sequence of steps that will complete the task.
+
+        IMPORTANT LANGUAGE REQUIREMENT: All natural-language content in your output should be in Simplified Chinese. The JSON keys and schema MUST remain exactly as specified in English.
+        """
 
     if sentinel_tasks_enabled:
         # Add SentinelPlanStep functionality
@@ -957,6 +967,8 @@ Please output an answer in pure JSON format according to the following schema. T
         "progress_summary": "a summary of the progress made so far"
 
     }}
+
+IMPORTANT LANGUAGE REQUIREMENT: All natural-language content you produce (including reasons, instructions, questions, and summaries) must be written in Simplified Chinese. Keep JSON keys and schema exactly as specified in English.
     """
     return base_prompt
 
