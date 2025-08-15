@@ -299,12 +299,12 @@ const PlanList: React.FC<PlanListProps> = ({
           }}
         >
           <div className="text-xl font-semibold text-primary">
-            Drop your plan file here to import
+            拖动计划文件到这里导入
           </div>
         </div>
       )}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Your Saved Plans</h1>
+        <h1 className="text-2xl font-bold">你的计划</h1>
         <div className="flex items-center gap-2 w-1/3">
           <Tooltip title="Create a new empty plan">
             <Button
@@ -312,7 +312,7 @@ const PlanList: React.FC<PlanListProps> = ({
               onClick={handleCreatePlan}
               className="flex items-center"
             >
-              Create
+              创建
             </Button>
           </Tooltip>
           <Tooltip title="Import a plan from a JSON file">
@@ -321,7 +321,7 @@ const PlanList: React.FC<PlanListProps> = ({
               onClick={() => fileInputRef.current?.click()}
               className="flex items-center"
             >
-              Import
+              导入
             </Button>
           </Tooltip>
           <Input
@@ -361,18 +361,18 @@ const PlanList: React.FC<PlanListProps> = ({
             <SearchOutlined
               style={{ fontSize: "48px", marginBottom: "16px" }}
             />
-            <p>No plans found matching "{searchTerm}"</p>
+            <p>没有找到匹配的计划 "{searchTerm}"</p>
             <Button
               type="link"
               onClick={() => setSearchTerm("")}
               className="mt-2"
             >
-              Clear search
+              清空搜索
             </Button>
           </div>
         ) : (
           <div className="col-span-3 flex flex-col items-center justify-center py-12 text-primary">
-            <p>No plans yet. Create one or import an existing plan.</p>
+            <p>没有找到计划. 创建一个或导入一个现有的计划.</p>
           </div>
         )}
       </div>

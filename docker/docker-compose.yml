@@ -14,12 +14,12 @@ services:
       - MAGENTIC_UI_API_DOCS=true
       - _APPDIR=/data/appdir
       - INTERNAL_WORKSPACE_ROOT=/data/appdir
-      - EXTERNAL_WORKSPACE_ROOT=/data/appdir
+      - EXTERNAL_WORKSPACE_ROOT=${HOST_WS_ROOT:-/data/projects/magentic-ui/docker/magui_data}
       - INSIDE_DOCKER=1
       - RUN_WITHOUT_DOCKER=False
       # - DATABASE_URI=sqlite:////data/appdir/magentic_ui.db
     volumes:
-      - ./magui_data:/data/appdir
+      - /data/projects/magentic-ui/docker/magui_data:/data/appdir
       - /var/run/docker.sock:/var/run/docker.sock
     expose:
       - "8081"

@@ -204,7 +204,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 }}
               >
                 <PlayCircle className="h-4 w-4 mr-1" />
-                Run Plan
+                运行计划
               </Button>
             </Tooltip>
           </div>,
