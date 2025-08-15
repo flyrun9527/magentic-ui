@@ -216,7 +216,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                 onClick={handleEdit}
               >
                 <Edit2 className="h-4 w-4 mr-1" />
-                Edit
+                修改
               </Button>
             </Tooltip>
           </div>,
