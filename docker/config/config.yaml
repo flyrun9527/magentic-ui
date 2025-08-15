@@ -4,11 +4,11 @@ max_actions_per_step: 5
 multiple_tools_per_call: false
 max_turns: 20
 approval_policy: never
-allow_for_replans: true
+allow_for_replans: false
 do_bing_search: false
 websurfer_loop: false
 retrieve_relevant_plans: never
-server_url: localhost
+server_url: 192.168.130.20
 mcp_agent_configs: []
 run_without_docker: false
 browser_headless: true
@@ -26,15 +26,15 @@ model_client_configs:
         max_output_tokens: 65536
         vision: false
         function_calling: true
-        json_output: true
+        json_output: false
         family: unknown
-        structured_output: false
+        structured_output: true
         multiple_system_messages: false
   web_surfer:
     provider: OpenAIChatCompletionClient
     config:
       provider: OpenAIChatCompletionClient
-      model: qwen2.5-vl-72b-instruct
+      model: qwen2.5-vl-32b-instruct
       api_key: sk-xxxxxx
       base_url: http://192.168.131.205:1234/v1
       max_retries: 5

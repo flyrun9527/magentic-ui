@@ -47,7 +47,7 @@ export const getStatusIcon = (
                 size={20}
                 className="flex-shrink-0 mr-2 text-accent"
               />
-              <span className="flex-1">Waiting for your input</span>
+              <span className="flex-1">等待你输入</span>
             </>
           )}
         </div>

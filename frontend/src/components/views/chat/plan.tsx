@@ -185,9 +185,9 @@ const PlanView: React.FC<PlanProps> = ({
         <div className="flex items-center mb-2">
           <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
           {fromMemory
-            ? "Potentially relevant plan retrieved from memory. "
-            : "Here's a plan. "}
-          <span> You can edit it directly or through the chat.</span>
+            ? "从记忆中检索到的潜在相关计划. "
+            : "这是一个计划. "}
+          <span> 您可以直接编辑它或通过聊天编辑它.</span>
         </div>
       )}
       <div className="rounded-none border-[var(--color-border-primary)]">
@@ -324,7 +324,7 @@ const PlanView: React.FC<PlanProps> = ({
                     className="mt-2 flex items-center text-[var(--color-text-secondary)] px-4 rounded hover:text-[var(--color-text-primary)] cursor-pointer"
                   >
                     <PlusIcon className="h-5 w-5 mr-2" />
-                    Add Step
+                    添加步骤
                   </div>
                 </div>
               </div>

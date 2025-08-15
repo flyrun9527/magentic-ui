@@ -46,7 +46,7 @@ export default function ProgressBar({
         <div className="flex justify-center w-full">
           <div className="w-full max-w-xs px-4 py-2">
             <div className="text-sm text-gray-500 mt-1 text-center font-medium">
-              Planning...
+              计划中...
             </div>
           </div>
         </div>
