@@ -35,7 +35,8 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
 # Install Chromium variants and their system dependencies for Playwright
 RUN playwright install --with-deps chromium chromium-headless-shell
 
-RUN mkdir -p /data/appdir
+# Create necessary directories
+RUN mkdir -p /data/appdir /data/config
 
 EXPOSE 8081
 
