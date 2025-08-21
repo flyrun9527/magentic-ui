@@ -325,7 +325,7 @@ const PlanList: React.FC<PlanListProps> = ({
             </Button>
           </Tooltip>
           <Input
-            placeholder="Search plans..."
+            placeholder="搜索计划..."
             prefix={<SearchOutlined className="text-primary" />}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
