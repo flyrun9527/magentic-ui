@@ -2,6 +2,20 @@ FROM ghcr.io/astral-sh/uv:python3.12-bookworm AS base
 
 WORKDIR /app
 
+# 配置APT清华源 (简化版本)
+RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
+    echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+
+# 清理APT缓存和配置
+RUN rm -rf /etc/apt/sources.list.d/* || true && \
+    apt-get clean || true && \
+    rm -rf /var/lib/apt/lists/* || true
+
+# Install system dependencies
+RUN  apt-get update && rm -rf /var/lib/apt/lists/*
+
 # Improve layer caching and avoid network during runtime
 ENV UV_LINK_MODE=copy \
     UV_PYTHON_DOWNLOADS=0 \

@@ -1,0 +1,80 @@
+cooperative_planning: false
+autonomous_execution: true
+max_actions_per_step: 5
+multiple_tools_per_call: false
+max_turns: 20
+approval_policy: never
+allow_for_replans: false
+do_bing_search: false
+websurfer_loop: false
+retrieve_relevant_plans: never
+server_url: 192.168.130.20
+mcp_agent_configs: []
+run_without_docker: false
+browser_headless: true
+model_client_configs:
+  orchestrator: &ref_0
+    provider: OpenAIChatCompletionClient
+    config:
+      model: qwen/qwen3-30b-a3b-2507
+      api_key: sk-xxxxxx
+      base_url: http://192.168.131.239:1234/v1
+      max_retries: 5
+      model_info:
+        encoding: cl100k_base
+        context_window: 32768
+        max_output_tokens: 65536
+        vision: false
+        function_calling: true
+        json_output: false
+        family: unknown
+        structured_output: true
+        multiple_system_messages: false
+  web_surfer:
+    provider: OpenAIChatCompletionClient
+    config:
+      provider: OpenAIChatCompletionClient
+      model: qwen2.5-vl-32b-instruct
+      api_key: sk-xxxxxx
+      base_url: http://192.168.131.239:1234/v1
+      max_retries: 5
+      model_info:
+        encoding: cl100k_base
+        context_window: 32768
+        max_output_tokens: 32768
+        vision: true
+        function_calling: true
+        json_output: true
+        family: unknown
+        structured_output: true
+        multiple_system_messages: false
+  coder: *ref_0
+  file_surfer: 
+    provider: OpenAIChatCompletionClient
+    config:
+      provider: OpenAIChatCompletionClient
+      model: qwen2.5-vl-32b-instruct
+      api_key: sk-xxxxxx
+      base_url: http://192.168.131.239:1234/v1
+      max_retries: 5
+      model_info:
+        encoding: cl100k_base
+        context_window: 32768
+        max_output_tokens: 32768
+        vision: true
+        function_calling: true
+        json_output: true
+        family: unknown
+        structured_output: true
+        multiple_system_messages: false
+  action_guard: *ref_0
+default_model: *ref_0
+advanced_agent_settings: false
+
+orchestrator_client: *ref_0
+coder_client: *ref_0
+web_surfer_client: *ref_0
+file_surfer_client: *ref_0
+action_guard_client: *ref_0
+user_proxy_client: *ref_0
+model_client: *ref_0
