@@ -10,6 +10,7 @@ import { ClickableImage } from "../atoms";
 import BrowserIframe from "./DetailViewer/browser_iframe";
 import BrowserModal from "./DetailViewer/browser_modal";
 import FullscreenOverlay from "./DetailViewer/fullscreen_overlay"; // Import our new component
+import FilesViewer from "./DetailViewer/FilesViewer";
 import { IPlan } from "../../types/plan";
 import { useSettingsStore } from "../../store";
 import { RcFile } from "antd/es/upload";
@@ -47,6 +48,7 @@ interface DetailViewerProps {
     accepted?: boolean,
     plan?: IPlan
   ) => void;
+  runId?: number;
 }
 
 type TabType = "screenshots" | "live";
@@ -64,6 +66,7 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
   onTabChange,
   detailViewerContainerId,
   onInputResponse,
+  runId,
 }) => {
   const [internalActiveTab, setInternalActiveTab] = useState<TabType>("live");
   const activeTab = controlledActiveTab ?? internalActiveTab;
@@ -241,6 +244,23 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
     );
   }, [novncPort, viewMode, runStatus, onPause, isControlMode, config.server_url]);
 
+  const renderFilesTab = () => {
+    if (!runId) {
+      return (
+        <div className="flex-1 w-full h-full min-h-0 flex items-center justify-center">
+          <p>未运行</p>
+        </div>
+      );
+    }
+
+    return (
+      <FilesViewer
+        runId={runId}
+        className="h-full"
+      />
+    );
+  };
+
   return (
     <>
       <div
@@ -270,6 +290,16 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
             >
               实时画面
             </button>
+            <button
+              className={`px-6 py-2 font-medium rounded-t-lg transition-colors ${
+                activeTab === "files"
+                  ? "bg-secondary text-primary border-2 border-b-0 border-primary"
+                  : "text-secondary hover:text-primary hover:bg-secondary/10"
+              }`}
+              onClick={() => handleTabChange("files")}
+            >
+              文件
+            </button>
           </div>
 
           <div className="flex gap-2">
@@ -298,7 +328,14 @@ const DetailViewer: React.FC<DetailViewerProps> = ({
         </div>
 
         <div className="flex-1 flex flex-col min-h-0">
-          {activeTab === "screenshots" ? renderScreenshotsTab() : renderLiveTab}
+          {activeTab === "screenshots" 
+            ? renderScreenshotsTab() 
+            : activeTab === "live" 
+            ? renderLiveTab 
+            : activeTab === "files"
+            ? renderFilesTab()
+            : renderScreenshotsTab()
+          }
         </div>
       </div>
 

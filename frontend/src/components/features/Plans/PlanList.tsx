@@ -110,7 +110,7 @@ const PlanList: React.FC<PlanListProps> = ({
   const handleUsePlan = async (plan: IPlan) => {
     try {
       message.loading({
-        content: "Creating new session from plan...",
+        content: "创建新会话...",
         key: "sessionCreation",
       });
 

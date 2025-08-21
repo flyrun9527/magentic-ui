@@ -43,7 +43,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         return;
       }
 
-      if (window.confirm(`Are you sure you want to delete "${plan.task}"?`)) {
+      if (window.confirm(`确定要删除 "${plan.task}"?`)) {
         await planAPI.deletePlan(plan.id, plan.user_id);
 
         if (onDeletePlan) {
