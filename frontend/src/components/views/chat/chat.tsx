@@ -1059,7 +1059,7 @@ export default function ChatView({
 
   const handleAcceptPlan = (text: string) => {
     if (currentRun?.status === "awaiting_input") {
-      const query = text || "Plan Accepted";
+      const query = text || "同意计划";
       handleInputResponse(query, [], true);
     }
   };

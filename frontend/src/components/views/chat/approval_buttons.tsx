@@ -38,7 +38,7 @@ const ApprovalButtons: React.FC<ApprovalButtonsProps> = ({
             className="bg-green-500 hover:bg-green-600 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
           >
             <CheckCircle className="h-5 w-5 mr-1" />
-            <span className="text-sm mr-1">Approve</span>
+            <span className="text-sm mr-1">同意</span>
           </button>
           <button
             type="button"
@@ -46,7 +46,7 @@ const ApprovalButtons: React.FC<ApprovalButtonsProps> = ({
             className="bg-red-500 hover:bg-red-600 text-white rounded flex justify-center items-center px-2 py-1.5 transition duration-300"
           >
             <CircleX className="h-5 w-5 mr-1" />
-            <span className="text-sm mr-1">Reject</span>
+            <span className="text-sm mr-1">拒绝</span>
           </button>
         </>
       ) : (
