@@ -51,7 +51,7 @@ interface DetailViewerProps {
   runId?: number;
 }
 
-type TabType = "screenshots" | "live";
+type TabType = "screenshots" | "live" | "files";
 
 const DetailViewer: React.FC<DetailViewerProps> = ({
   images,

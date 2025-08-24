@@ -64,7 +64,7 @@ const RunView: React.FC<RunViewProps> = ({
   const [novncPort, setNovncPort] = useState<string | undefined>();
   const [detailViewerExpanded, setDetailViewerExpanded] = useState(false);
   const [detailViewerTab, setDetailViewerTab] = useState<
-    "screenshots" | "live"
+    "screenshots" | "live"  | "files"
   >("live");
   const [hiddenMessageIndices, setHiddenMessageIndices] = useState<Set<number>>(
     new Set()
@@ -628,6 +628,7 @@ const RunView: React.FC<RunViewProps> = ({
                       isLatestPlan ? handleRegeneratePlan : undefined
                     }
                     forceCollapsed={shouldForceCollapse}
+                    runId={Number(run.id)}
                   />
                 </div>
               );

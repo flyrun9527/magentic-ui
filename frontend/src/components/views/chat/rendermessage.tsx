@@ -22,6 +22,10 @@ import PlanView from "./plan";
 import { IPlanStep, convertToIPlanSteps } from "../../types/plan";
 import RenderFile from "../../common/filerenderer";
 import LearnPlanButton from "../../features/Plans/LearnPlanButton";
+import QuotePreviewDrawer from "./DetailViewer/QuotePreviewDrawer";
+import { getServerUrl } from "../../utils";
+import PDFHighlighterTest from "./DetailViewer/PDFHighlighterTest";
+import PdfDrawer from "./DetailViewer/PdfDrawer";
 
 // Types
 interface MessageProps {
@@ -40,6 +44,7 @@ interface MessageProps {
   onRegeneratePlan?: () => void;
   runStatus?: string;
   forceCollapsed?: boolean;
+  runId: number;
 }
 
 interface RenderPlanProps {
@@ -462,24 +467,70 @@ interface RenderFinalAnswerProps {
   content: string;
   sessionId: number;
   messageIdx: number;
+  runId: number;
 }
 
 const RenderFinalAnswer: React.FC<RenderFinalAnswerProps> = memo(
-  ({ content, sessionId, messageIdx }) => {
+  ({ content, sessionId, messageIdx, runId }) => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    // 添加调试信息
+    useEffect(() => {
+      console.log('RenderFinalAnswer props:', { content, sessionId, messageIdx, runId });
+    }, [content, sessionId, messageIdx, runId]);
+
     return (
       <div className="border-2 border-secondary rounded-lg p-4">
         <div className="flex justify-between items-center">
           <div className="font-semibold text-primary">Final Answer</div>
-          <LearnPlanButton
-            sessionId={sessionId}
-            messageId={messageIdx}
-            onSuccess={(planId: string) => {
-            }}
-          />
+          <div className="flex items-center gap-2">
+            <button
+              className="px-2 py-1 rounded bg-secondary hover:bg-secondary/70 text-primary text-sm"
+              onClick={() => setIsDrawerOpen(true)}
+            >
+              引用原文
+            </button>
+            <LearnPlanButton
+              sessionId={sessionId}
+              messageId={messageIdx}
+              onSuccess={(planId: string) => {
+              }}
+            />
+          </div>
         </div>
         <div className="break-words">
           <MarkdownRenderer content={content} />
         </div>
+        {/* <PDFHighlighterTest /> */}
+        {/* <QuotePreviewDrawer
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          pdfUrl={`${getServerUrl()}/files/convert/docx2pdf/${runId}?filename=信息化建设类合同.docx`}
+          position={{
+            page: 1, // 从第1页开始
+            left: 100, // PDF 坐标通常较大
+            top: 200,
+            width: 300,
+            height: 50
+          }}
+        /> */}
+      <PdfDrawer
+        pdfUrl={`${getServerUrl()}/files/convert/docx2pdf/${runId}?filename=信息化建设类合同.docx`}
+        chunk={{
+          available_int: 1,
+          chunk_id: '1',
+          content_with_weight: 'test',
+          doc_id: '1',
+          doc_name: 'test',
+          image_id: '1',
+          positions: [
+            [14, 115, 310, 690, 710],
+            [15, 80, 510, 75, 710]
+          ]
+        }}
+        visible={isDrawerOpen}
+        hideModal={() => setIsDrawerOpen(false)}
+      />
       </div>
     );
   }
@@ -667,6 +718,7 @@ export const RenderMessage: React.FC<MessageProps> = memo(
     onToggleHide,
     onRegeneratePlan,
     forceCollapsed = false,
+    runId,
   }) => {
     if (!message) return null;
     if (message.metadata?.type === "browser_address") return null;
@@ -755,6 +807,7 @@ export const RenderMessage: React.FC<MessageProps> = memo(
                   content={orchestratorContent.content}
                   sessionId={sessionId}
                   messageIdx={messageIdx}
+                  runId={runId}
                 />
               ) : messageUtils.isToolCallContent(parsedContent.text) ? (
                 <RenderToolCall content={parsedContent.text} />

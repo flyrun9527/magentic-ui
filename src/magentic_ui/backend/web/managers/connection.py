@@ -198,6 +198,8 @@ class WebSocketManager:
             input_func: InputFuncType = self.create_input_func(run_id)
 
             message: ChatMessage | AgentEvent | TeamResult | LLMCallEventMessage
+            print(f"team_config: {team_config}")
+            print(f"settings_config: {settings_config}")
             async for message in team_manager.run_stream(
                 task=task,
                 team_config=team_config,

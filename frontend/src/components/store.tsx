@@ -29,12 +29,13 @@ export interface GeneralConfig {
 }
 
 const defaultConfig: GeneralConfig = {
-  cooperative_planning: true,
-  autonomous_execution: false,
+  cooperative_planning: false,
+  autonomous_execution: true,
   max_actions_per_step: 5,
   multiple_tools_per_call: false,
   max_turns: 20,
-  approval_policy: "auto-conservative",
+  // approval_policy: "auto-conservative",
+  approval_policy: "never",
   allow_for_replans: true,
   do_bing_search: false,
   websurfer_loop: false,

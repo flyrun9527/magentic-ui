@@ -135,7 +135,7 @@ def get_path_validation_code(path: str) -> str:
     return f"""
 import os
 def validate{inner_func}
-validate('{path}')
+validate({repr(path)})
 """
 
 
@@ -144,7 +144,7 @@ def get_is_dir_check_code(path: str) -> str:
     return f"""
 import os
 def check{inner_func}
-check('{path}')
+check({repr(path)})
 """
 
 
@@ -153,7 +153,7 @@ def get_file_conversion_code(path: str) -> str:
     return f"""
 from markitdown import MarkItDown
 def convert{inner_func}
-convert('{path}')
+convert({repr(path)})
 """
 
 
@@ -165,7 +165,7 @@ def get_directory_listing_code(local_path: str) -> str:
 import os
 import datetime
 def list_directory{inner_func}
-list_directory('{local_path}')
+list_directory({repr(local_path)})
 """
 
 
@@ -175,5 +175,5 @@ def get_find_files_code(query: str) -> str:
 import os
 from difflib import SequenceMatcher
 def find_files{inner_func}
-find_files('{query}')
+find_files({repr(query)})
 """

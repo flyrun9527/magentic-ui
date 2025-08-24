@@ -48,6 +48,7 @@ dependencies = [
     "pyyaml",
     "html2text",
     "psutil",
+    "docx2pdf>=0.1.8",
 ]
 
 [project.urls]
@@ -91,6 +92,9 @@ dev-dependencies = [
     "types-docker",
     "types-PyYaml",
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
 
 [tool.ruff]
 exclude = ["src/benchmarks/assistantbench"]

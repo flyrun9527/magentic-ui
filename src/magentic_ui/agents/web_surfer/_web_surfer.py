@@ -136,8 +136,8 @@ class WebSurferConfig(BaseModel):
     single_tab_mode: bool = False
     json_model_output: bool = False
     multiple_tools_per_call: bool = False
-    viewport_height: int = 1440
-    viewport_width: int = 1440
+    viewport_height: int = 1080
+    viewport_width: int = 1920
     use_action_guard: bool = False
 
 
@@ -194,8 +194,8 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         url_block_list (List[str], optional): A list of URLs to block. Default: None.
         json_model_output (bool, optional): Whether to use JSON output for model_client instead of tool calls. Default: False.
         multiple_tools_per_call (bool, optional): Whether to allow execution of multiple tool calls sequentially per model call. Default: False.
-        viewport_height (int, optional): The height of the viewport. Default: 1440.
-        viewport_width (int, optional): The width of the viewport. Default: 1440.
+        viewport_height (int, optional): The height of the viewport. Default: 1080.
+        viewport_width (int, optional): The width of the viewport. Default: 1920.
     """
 
     component_type = "agent"
@@ -249,8 +249,8 @@ class WebSurfer(BaseChatAgent, Component[WebSurferConfig]):
         single_tab_mode: bool = False,
         json_model_output: bool = False,
         multiple_tools_per_call: bool = False,
-        viewport_height: int = 1440,
-        viewport_width: int = 1440,
+        viewport_height: int = 1080,
+        viewport_width: int = 1920,
         use_action_guard: bool = False,
     ) -> None:
         """

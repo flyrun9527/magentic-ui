@@ -191,4 +191,6 @@ class DockerPlaywrightBrowser(PlaywrightBrowser):
             self._playwright, browser_address
         )
         logger.info("Connected to browser")
-        self._context = await self._browser.new_context()
+        self._context = await self._browser.new_context(
+            viewport={"width": 1920, "height": 1080}
+        )
