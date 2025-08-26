@@ -12,6 +12,7 @@
     "dev": "npm run develop",
     "start": "gatsby clean && gatsby develop",
     "build": "gatsby clean && rm -rf ../src/magentic_ui/backend/web/ui && PREFIX_PATH_VALUE='' gatsby build --prefix-paths && rsync -a --delete public/ ../src/magentic_ui/backend/web/ui/",
+    "build:win": "gatsby clean && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
@@ -40,7 +41,6 @@
     "install": "^0.13.0",
     "js-yaml": "^4.1.0",
     "lucide-react": "^0.460.0",
-    "pdfjs-dist": "4.4.168",
     "postcss": "^8.4.49",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -62,6 +62,7 @@
     "@types/react-dom": "^18.2.19",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/uuid": "^10.0.0",
+    "null-loader": "^4.0.1",
     "typescript": "^5.3.3"
   },
   "resolutions": {

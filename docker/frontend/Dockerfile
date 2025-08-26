@@ -18,7 +18,7 @@ RUN rm -rf /etc/apt/sources.list.d/* || true && \
     apt-get clean || true && \
     rm -rf /var/lib/apt/lists/* || true
     
-# Build deps for sharp/gatsby
+# Build deps for sharp/gatsby and canvas
 RUN apt-get update && apt-get install -y \
     python3 \
     make \
@@ -31,6 +31,18 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libglib2.0-0 \
     libglib2.0-dev \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    librsvg2-dev \
+    # Canvas dependencies
+    libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    shared-mime-info \
   && rm -rf /var/lib/apt/lists/*
 
 # Use yarn via corepack
@@ -45,6 +57,12 @@ RUN corepack enable
 # RUN yarn config set sharp_libvips_binary_host=https://npmmirror.com/mirrors/sharp-libvips
 # # ENV SHARP_DIST_BASE_URL="https://dgithub.xyz/lovell/sharp-libvips/releases/download/v8.14.5/"
 ENV SHARP_IGNORE_GLOBAL_LIBVIPS=false
+# Set environment variables for canvas
+ENV CANVAS_PREBUILT=1
+ENV NODE_ENV=production
+# Additional canvas build environment variables
+ENV PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig"
+ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu"
 # Copy manifests first for caching
 COPY frontend/package.json frontend/yarn.lock ./
 
@@ -53,14 +71,14 @@ COPY frontend/package.json frontend/yarn.lock ./
 #  && yarn config set network-timeout 600000 
 
 # Install dependencies
-RUN SHARP_IGNORE_GLOBAL_LIBVIPS=false yarn install
+RUN SHARP_IGNORE_GLOBAL_LIBVIPS=false yarn install --network-timeout 600000
 
 # Copy source
 COPY frontend/ .
 
 # Build Gatsby static site to /app/frontend/public
 RUN npx gatsby clean && \
-    PREFIX_PATH_VALUE='' npx gatsby build --prefix-paths
+    PREFIX_PATH_VALUE='' npx gatsby build --prefix-paths --no-color
 
 ########################
 # Runtime stage

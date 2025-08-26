@@ -1,7 +1,7 @@
 cooperative_planning: false
 autonomous_execution: true
 max_actions_per_step: 5
-# user_proxy_type: dummy
+user_proxy_type: None
 multiple_tools_per_call: false
 max_turns: 20
 approval_policy: never
