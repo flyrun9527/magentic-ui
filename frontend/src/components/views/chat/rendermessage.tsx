@@ -515,7 +515,8 @@ const RenderFinalAnswer: React.FC<RenderFinalAnswerProps> = memo(
           }}
         /> */}
       <PdfDrawer
-        pdfUrl={`${getServerUrl()}/files/convert/docx2pdf/${runId}?filename=信息化建设类合同.docx`}
+        // pdfUrl={`${getServerUrl()}/files/convert/docx2pdf/${runId}?filename=信息化建设类合同.docx`}
+        pdfUrl={`http://192.168.112.146:9000/jicha/信息化建设类合同.pdf`}
         chunk={{
           available_int: 1,
           chunk_id: '1',

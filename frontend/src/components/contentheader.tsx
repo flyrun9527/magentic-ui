@@ -6,7 +6,7 @@ import { useConfigStore } from "../hooks/store";
 import { Settings } from "lucide-react";
 import SignInModal from "./signin";
 import SettingsModal from "./settings/SettingsModal";
-import logo from "../assets/logo.svg";
+// import logo from "../assets/logo.svg";
 import { Button } from "./common/Button";
 
 type ContentHeaderProps = {
