@@ -193,7 +193,7 @@ const PlanView: React.FC<PlanProps> = ({
       <div className="rounded-none border-[var(--color-border-primary)]">
         {viewOnly && isCollapsed ? (
           <div
-            className="flex items-center hover:opacity-80 cursor-pointer opacity-50"
+            className="flex items-center hover:opacity-80 cursor-pointer opacity-50 text-lg"
             onClick={() => setIsCollapsed(false)}
           >
             <ClipboardList className="h-5 w-5 mr-2 flex-shrink-0" />
@@ -208,7 +208,7 @@ const PlanView: React.FC<PlanProps> = ({
             ) : (
               <div className="flex justify-between items-center">
                 <div
-                  className={`flex items-center ${
+                  className={`flex items-center text-lg ${
                     viewOnly ? "hover:opacity-80 cursor-pointer" : ""
                   }`}
                   onClick={viewOnly ? () => setIsCollapsed(true) : undefined}

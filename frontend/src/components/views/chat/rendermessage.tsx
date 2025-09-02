@@ -437,7 +437,7 @@ const RenderStepExecution: React.FC<RenderStepExecutionProps> = memo(
               )}
             </button>
             <div className="flex-1 mx-2">
-              <div className="font-semibold text-primary">
+              <div className="font-semibold text-primary text-lg">
                 Step {content.index + 1}: {content.title}
               </div>
             </div>
@@ -669,7 +669,7 @@ const RenderUserMessage: React.FC<{
           {parsedContent.text.map((item, index) => (
             <div key={index}>
               {typeof item === "string" ? (
-                <div className="break-words whitespace-pre-wrap overflow-wrap-anywhere">
+                <div className="break-words whitespace-pre-wrap overflow-wrap-anywhere text-xl">
                   {parseContent(item)}
                 </div>
               ) : (
@@ -679,7 +679,7 @@ const RenderUserMessage: React.FC<{
           ))}
         </div>
       ) : (
-        <div className="break-words whitespace-pre-wrap overflow-wrap-anywhere">
+        <div className="break-words whitespace-pre-wrap overflow-wrap-anywhere  text-xl">
           {String(parsedContent.text)}
         </div>
       )}

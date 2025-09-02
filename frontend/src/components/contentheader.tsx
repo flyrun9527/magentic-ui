@@ -72,7 +72,7 @@ const ContentHeader = ({
         {/* User Profile and Settings */}
         <div className="flex items-center space-x-4">
           {/* User Profile */}
-          {user && (
+          {/* {user && (
             <Tooltip title="View or update your profile">
               <div
                 className="flex items-center space-x-2 cursor-pointer"
@@ -91,10 +91,10 @@ const ContentHeader = ({
                 )}
               </div>
             </Tooltip>
-          )}
+          )} */}
 
           {/* Settings Button */}
-          <div className="text-primary">
+          {/* <div className="text-primary">
             <Tooltip title="Settings">
               <Button
                 variant="tertiary"
@@ -105,7 +105,7 @@ const ContentHeader = ({
                 aria-label="Settings"
               />
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       </div>
 

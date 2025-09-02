@@ -175,7 +175,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       className="prose w-full "
       style={{
         color,
-        fontSize: "0.85rem",
+        fontSize: "0.95rem",
         overflowWrap: "break-word",
         wordWrap: "break-word",
         wordBreak: "break-word",
@@ -198,19 +198,34 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h1: ({ children }) => <h1 style={{ color }}>{children}</h1>,
-          h2: ({ children }) => <h2 style={{ color }}>{children}</h2>,
-          h3: ({ children }) => <h3 style={{ color }}>{children}</h3>,
-          h4: ({ children }) => <h4 style={{ color }}>{children}</h4>,
-          h5: ({ children }) => <h5 style={{ color }}>{children}</h5>,
-          h6: ({ children }) => <h6 style={{ color }}>{children}</h6>,
+          h1: ({ children }) => <h1 className="text-4xl font-bold" style={{ color }}>{children}</h1>,
+          h2: ({ children }) => <h2 className="text-3xl font-semibold" style={{ color }}>{children}</h2>,
+          h3: ({ children }) => <h3 className="text-2xl font-medium" style={{ color }}>{children}</h3>,
+          h4: ({ children }) => <h4 className="text-xl font-medium" style={{ color }}>{children}</h4>,
+          h5: ({ children }) => <h5 className="text-lg font-medium" style={{ color }}>{children}</h5>,
+          h6: ({ children }) => <h6 className="text-base font-medium" style={{ color }}>{children}</h6>,
           p: ({ children }) => (
-            <p className="" style={{ color }}>
+            <p className="text-lg leading-relaxed" style={{ color }}>
               {children}
             </p>
           ),
+          ul: ({ children }) => (
+            <ul className="list-disc list-inside ml-4 space-y-1 text-lg" style={{ color }}>
+              {children}
+            </ul>
+          ),
+          ol: ({ children }) => (
+            <ol className=" text-lg" style={{ color }}>
+              {children}
+            </ol>
+          ),
+          li: ({ children }) => (
+            <li className="text-lg leading-relaxed" style={{ color }}>
+              {children}
+            </li>
+          ),
           strong: ({ children }) => (
-            <strong style={{ color }}>{children}</strong>
+            <strong className="font-bold text-xl" style={{ color }}>{children}</strong>
           ),
           a: ({ href, children }) => (
             <a
