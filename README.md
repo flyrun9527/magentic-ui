@@ -7,14 +7,22 @@ _Automate your web tasks while you stay in control_
 [![image](https://img.shields.io/pypi/v/magentic_ui.svg)](https://pypi.python.org/pypi/magentic_ui)
 [![image](https://img.shields.io/pypi/l/magentic_ui.svg)](https://pypi.python.org/pypi/magentic_ui)
 ![Python Versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+[![arXiv](https://img.shields.io/badge/arXiv-2507.22358-b31b1b.svg)](https://arxiv.org/abs/2507.22358)
 
 </div>
 
 ---
 
-Magentic-UI is a **research prototype** of a human-centered interface powered by a multi-agent system that can browse and perform actions on the web, generate and execute code, and generate and analyze files.
+Magentic-UI is a **research prototype** human-centered AI agent that solves complex web and coding tasks that may require monitoring. Unlike other black-box agents, the system reveals its plan before executions, lets you guide its actions, and requests approval for sensitive operations while browsing websites, executing code, and analyzing files.
+*Check out the [demo section](#demos) for inspiration on what tasks you can accomplish.*
 
-  https://github.com/user-attachments/assets/7975fc26-1a18-4acb-8bf9-321171eeade7
+## ✨ What's New
+
+- **"Tell me When"**: Automate monitoring tasks and repeatable workflows that require web or API access that span minutes to days. *Learn more [here](https://www.microsoft.com/en-us/research/blog/tell-me-when-building-agents-that-can-wait-monitor-and-act/).*
+- **File Upload Support**: Upload any file through the UI for analysis or modification
+- **MCP Agents**: Extend capabilities with your favorite MCP servers
+- **Easier Installation**: We have uploaded our docker containers to GHCR so you no longer need to build any containers! Installation time now is much quicker.
+
 
 ## 🚀 Quick Start
 
@@ -36,12 +44,6 @@ magentic-ui --port 8081
 Then open <http://localhost:8081> in your browser to interact with Magentic-UI!
 
 > **Prerequisites**: Requires Docker and Python 3.10+. Windows users should use WSL2. See [detailed installation](#️-installation) for more info.
-
-## ✨ What's New
-
-- **File Upload Support**: Upload any file through the UI for analysis or modification
-- **MCP Agents**: Extend capabilities with your favorite MCP servers
-- **Easier Installation**: We have uploaded our docker containers to GHCR so you no longer need to build any containers! Installation time now is much quicker.
 
 ## Alternative Usage Options
 
@@ -68,11 +70,11 @@ You can then pass a config file to the `magentic-ui` command (<a href="#model-cl
 
 For further details on installation please read the   <a href="#️-installation">🛠️ Installation</a> section. For common installation issues and their solutions, please refer to the [troubleshooting document](TROUBLESHOOTING.md). See advanced usage instructions with the command `magentic-ui --help`. 
 
-
 ## Quick Navigation:
 <p align="center">
-  <a href="#-how-it-works">🟪 How it Works</a> &nbsp;|&nbsp;
-  <a href="#️-installation">🛠️ Installation</a> &nbsp;|&nbsp;
+  <a href="#demos">🎬 Demos</a> &nbsp;|&nbsp;
+  <a href="#how-it-works">🟪 How it Works</a> &nbsp;|&nbsp;
+  <a href="#️installation">🛠️ Installation</a> &nbsp;|&nbsp;
   <a href="#troubleshooting">⚠️ Troubleshooting</a> &nbsp;|&nbsp; 
   <a href="#contributing">🤝 Contributing</a> &nbsp;|&nbsp;
   <a href="#license">📄 License</a>
@@ -80,28 +82,48 @@ For further details on installation please read the   <a href="#️-installation
 
 ---
 
-## 🟪 How it Works
+## Demos
+
+<table>
+<tr>
+<td width="33%" align="center">
+
+**🍕 Pizza Ordering**  
+*Web automation with human-in-the-loop*
+
+<video src="https://github.com/user-attachments/assets/dc95cf5f-c4b4-4fe0-b708-158ff071e5a9" width="100%" style="max-height: 300px;">
+</video>
+
+</td>
+<td width="33%" align="center">
+
+**🏠 Airbnb Price Analysis**  
+*MCP agent integration*
+
+<video src="https://github.com/user-attachments/assets/c19ed8c2-e06f-43b7-bee3-5e2ffc4c5e02" width="100%" style="max-height: 300px;">
+</video>
+
+</td>
+<td width="33%" align="center">
+
+**⭐ Star Monitoring**  
+*Long-running monitoring task*
+
+<video src="https://github.com/user-attachments/assets/d2a463ca-7a94-4414-932d-a69f30fff63b" width="100%" style="max-height: 300px;">
+</video>
+
+</td>
+</tr>
+</table>
+
+
+
+## How it Works
 <p align="center">
   <img src="./docs/img/magenticui_running.png" alt="Magentic-UI" height="400">
 </p>
 
 Magentic-UI is especially useful for web tasks that require actions on the web (e.g., filling a form, customizing a food order), deep navigation through websites not indexed by search engines (e.g., filtering flights, finding a link from a personal site) or tasks that need web navigation and code execution (e.g., generate a chart from online data).
-
-The interface of Magentic-UI is displayed in the screenshot above and consists of two panels. The left side panel is the sessions navigator where users can create new sessions to solve new tasks, switch between sessions and check on session progress with the session status indicators (🔴 needs input, ✅ task done, ↺ task in progress).
-
-The right-side panel displays the session selected. This is where you can type your query to Magentic-UI alongside any file attachments and observe detailed task progress as well as  interact with the agents. The session display itself is split in two panels: the left side is where Magentic-UI presents the plan, task progress and asks for action approvals, the right side is a browser view where you can see web agent actions in real time and interact with the browser. Finally, at the top of the session display is a progress bar that updates as Magentic-UI makes progress.
-
-
-The example below shows a step by step user interaction with Magentic-UI:
-
-<!-- Screenshots -->
-<p align="center">
-  <img src="docs/img/magui-landing.png" alt="Magentic-UI Landing" width="45%" style="margin:10px;">
-  <img src="docs/img/magui-coplanning.png" alt="Co-Planning UI" width="45%" style="margin:10px;">
-  <img src="docs/img/magui-cotasking.png" alt="Co-Tasking UI" width="45%" style="margin:10px;">
-  <img src="docs/img/magui-actionguard.png" alt="Action Guard UI" width="45%" style="margin:10px;">
-</p>
-
 
 What differentiates Magentic-UI from other browser use offerings is its transparent and controllable interface that allows for efficient human-in-the-loop involvement. Magentic-UI is built using [AutoGen](https://github.com/microsoft/autogen) and provides a platform to study human-agent interaction and experiment with web agents. Key features include:
 
@@ -128,6 +150,7 @@ To reproduce these experimental results, please see the following [instructions]
 
 
 If you're interested in reading more checkout our [technical report](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/07/magentic-ui-report.pdf) and [blog post](https://www.microsoft.com/en-us/research/blog/magentic-ui-an-experimental-human-centered-web-agent/).
+
 
 ## 🛠️ Installation
 ### Pre-Requisites
@@ -349,6 +372,20 @@ This project welcomes contributions and suggestions. For information about contr
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+
+## Citation
+
+Please cite our paper if you use our work in your research:
+
+```
+@article{mozannar2025magentic,
+  title={Magentic-UI: Towards Human-in-the-loop Agentic Systems},
+  author={Mozannar, Hussein and Bansal, Gagan and Tan, Cheng and Fourney, Adam and Dibia, Victor and Chen, Jingya and Gerrits, Jack and Payne, Tyler and Maldaner, Matheus Kunzler and Grunde-McLaughlin, Madeleine and others},
+  journal={arXiv preprint arXiv:2507.22358},
+  year={2025}
+}
+```
+
 ## License
 
 Microsoft, and any contributors, grant you a license to any code in the repository under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](LICENSE) file.
@@ -363,3 +400,4 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 Privacy information can be found at <https://go.microsoft.com/fwlink/?LinkId=521839>
 
 Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents, or trademarks, whether by implication, estoppel, or otherwise.
+

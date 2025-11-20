@@ -22,7 +22,7 @@ from .routes import (
     teams,
     validation,
     ws,
-    files,
+    mcp,
 )
 
 # Initialize application
@@ -158,10 +158,9 @@ api.include_router(
 )
 
 api.include_router(
-    files.router,
-    prefix="/files",
-    tags=["files"],
-    responses={404: {"description": "Not found"}},
+    mcp.router,
+    prefix="/mcp",
+    tags=["mcp"],
 )
 
 
